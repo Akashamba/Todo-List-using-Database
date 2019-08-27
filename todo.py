@@ -22,6 +22,7 @@ while True:
     w.FindElement('pbox').Update(priority)
 
     if button == "ADD":
+        task = values['data'].capitalize()
         task = values['data']
         priority = values['priority']
         back.write(task, priority)
