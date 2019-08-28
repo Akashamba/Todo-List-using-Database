@@ -50,6 +50,9 @@ def deletecompleted(x):
     c.execute('''delete from done where Task=?''', x)
     db.commit()
 
+def deleteallcompleted():
+    c.execute('''delete from done''')
+    db.commit()
 
 def complete(x):
     c.execute('''INSERT into done (Task) VALUES(?) ''', (x))
