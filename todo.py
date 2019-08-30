@@ -6,13 +6,13 @@ col='lavender'
 def front():
     flayout=[
         [s.Text("To Do List", background_color= col)],
-        #[s.Text("Press ENTER to continue", background_color= col)],
-        #[s.Button("ENTER"), s.Button("EXIT")]
+        [s.Text("Press ENTER to continue", background_color= col,)],
+        [s.Button("ENTER"), s.Button("EXIT")]
 
     ]
 
     w=s.Window("To Do List", flayout, size=(500,100), element_justification='center', resizable=1,
-               background_color= col, auto_close=1, auto_close_duration=1)
+               background_color= col, auto_close=1, auto_close_duration=3)
 
     button, values = w.Read()
 
@@ -130,7 +130,7 @@ while True:
                     completed = back.readcompleted()
                     c.FindElement('comp').Update(completed)
                 else:
-                    s.Popup("You have no tasks", auto_close_duration_duration=1)
+                    s.Popup("You have no tasks", auto_close_duration=1)
                     continue
 
             elif events == "CLOSE":
