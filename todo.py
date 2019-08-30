@@ -19,6 +19,7 @@ layout = [
 
 w = s.Window("To Do", layout)
 
+
 while True:
     button, values = w.Read()
     w.FindElement('tbox').Update(task)
@@ -39,28 +40,42 @@ while True:
         w.FindElement('pbox').Update(priority)
 
     if button == "CLEAR LIST":
-        back.cleartable()
-        task = back.readtask()
-        priority = back.readpriority()
-        w.FindElement('tbox').Update(task)
-        w.FindElement('pbox').Update(priority)
+        if task:
+            back.cleartable()
+            task = back.readtask()
+            priority = back.readpriority()
+            w.FindElement('tbox').Update(task)
+            w.FindElement('pbox').Update(priority)
+
+        else:
+            s.Popup("You have no tasks")
+            continue
 
     if button == "DELETE":
-        x = values['tbox'][0]
-        back.delete(x)
-        task = back.readtask()
-        priority = back.readpriority()
-        w.FindElement('tbox').Update(task)
-        w.FindElement('pbox').Update(priority)
+        if task:
+            x = values['tbox'][0]
+            back.delete(x)
+            task = back.readtask()
+            priority = back.readpriority()
+            w.FindElement('tbox').Update(task)
+            w.FindElement('pbox').Update(priority)
+        else:
+            s.Popup("You have no tasks")
+            continue
 
     if button == "COMPLETED":
-        x = values['tbox'][0]
-        back.complete(x)
-        task = back.readtask()
-        priority = back.readpriority()
-        completed = back.readcompleted()
-        w.FindElement('tbox').Update(task)
-        w.FindElement('pbox').Update(priority)
+        if task:
+            x = values['tbox'][0]
+            back.complete(x)
+            task = back.readtask()
+            priority = back.readpriority()
+            completed = back.readcompleted()
+            w.FindElement('tbox').Update(task)
+            w.FindElement('pbox').Update(priority)
+
+        else:
+            s.Popup("You have no tasks")
+            continue
 
     if button == "VIEW COMPLETED":
         layoutc = [
@@ -77,19 +92,29 @@ while True:
             c.FindElement('comp').Update(completed)
 
             if events == "REMOVE":
-                d = values['comp'][0]
-                back.deletecompleted(d)
-                completed = back.readcompleted()
-                c.FindElement('comp').Update(completed)
+                if completed:
+                    d = values['comp'][0]
+                    back.deletecompleted(d)
+                    completed = back.readcompleted()
+                    c.FindElement('comp').Update(completed)
 
-            elif events =="REMOVE ALL":
-                back.deleteallcompleted()
-                completed = back.readcompleted()
-                c.FindElement('comp').Update(completed)
+                else:
+                    s.Popup("You have no tasks")
+                    continue
+
+            elif events == "REMOVE ALL":
+                if completed:
+                    back.deleteallcompleted()
+                    completed = back.readcompleted()
+                    c.FindElement('comp').Update(completed)
+                else:
+                    s.Popup("You have no tasks")
+                    continue
 
             elif events == "CLOSE":
                 c.close()
                 break
 
     if button == "EXIT":
+        w.close()
         break
