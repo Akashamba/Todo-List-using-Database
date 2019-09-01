@@ -7,7 +7,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS done(Task TEXT)''')
 db.commit()
 
 
-def write(task, priority):
+def write(task, priority=1):
     c.execute('''INSERT into todo (Task, Priority) VALUES(?,?) ''', (task, priority))
     db.commit()
 
