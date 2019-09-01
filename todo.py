@@ -7,8 +7,8 @@ col = 'lavender'
 def front():
     flayout = [
         [s.Text("To Do List", background_color=col)],
-        [s.Text("Press ENTER to continue", background_color=col)],
-        [s.Button("ENTER"), s.Button("EXIT")]
+        #[s.Text("Press ENTER to continue", background_color=col)],
+        #[s.Button("ENTER"), s.Button("EXIT")]
 
     ]
 
@@ -53,12 +53,14 @@ while True:
 
     if button == "ADD NEW ITEM":
         task = values['data'].capitalize()
+        print(task)
         priority = values['priority']
 
         if task != "":
             back.write(task, priority)
 
         task = back.readtask()
+        print(task)
         priority = back.readpriority()
 
         w.FindElement('data').Update("")
@@ -144,3 +146,4 @@ while True:
     if button == "EXIT":
         w.close()
         break
+
