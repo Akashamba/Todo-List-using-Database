@@ -48,19 +48,18 @@ front()
 
 while True:
     button, values = w.Read()
-    w.FindElement('tbox').Update(task)
-    w.FindElement('pbox').Update(priority)
+
+
+    
 
     if button == "ADD NEW ITEM":
         task = values['data'].capitalize()
-        print(task)
         priority = values['priority']
 
         if task != "":
             back.write(task, priority)
 
         task = back.readtask()
-        print(task)
         priority = back.readpriority()
 
         w.FindElement('data').Update("")
@@ -143,7 +142,12 @@ while True:
                 c.close()
                 break
 
-    if button == "EXIT":
+            elif events is None:
+                c.close()
+                break
+
+    if button is None or button == 'EXIT':
         w.close()
         break
 
+w.close()
